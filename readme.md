@@ -1,5 +1,5 @@
 # Developement
-Il faut installer (node.js)[https://nodejs.org/en/download]
+Il faut installer [node.js](https://nodejs.org/en/download)
 Lancer à la racine du projet
 
 ```
