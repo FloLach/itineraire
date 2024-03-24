@@ -1,12 +1,24 @@
 @import "node_modules/ol/ol.css";
 
-html, body {
-  margin: 0;
-  height: 100%;
+
+#itineraireMapContainer {    
+  border : 1px solid #336699;
+  width:650px;
+  height:560px;
 }
-#map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+
+div#itineraireMapContainer.print_portrait {
+  font-family: Verdana,Geneva,Arial,sans-serif;
+  font-size: 9pt; line-height : 180%;
+  border : 1px solid Fuchsia;
+  width:980px;
+  height:1340px;
+}
+
+div#itineraireMapContainer.print_paysage {
+  border : 1px solid #336699;
+  width:1740px;
+  height:1170px;
+  /*width:1120px;
+  height:740px;*/
 }
