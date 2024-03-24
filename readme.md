@@ -1,18 +1,22 @@
-# OpenLayers + Vite
-
-This example demonstrates how the `ol` package can be used with [Vite](https://vitejs.dev/).
-
-To get started, run the following (requires Node 14+):
-
-    npx create-ol-app my-app --template vite
-
-Then change into your new `my-app` directory and start a development server (available at http://localhost:5173):
-
-    cd my-app
+# Developement
+Il faut installer (node.js)[https://nodejs.org/en/download]
+Lancer à la racine du projet
     npm start
 
-To generate a build ready for production:
+Ouvrir l'url afficher.
+Le script principale est map.js.
 
+# Deployment
+Lancer à la racine du projet
     npm run build
+    mkdir .\dist\javascript
+    mkdir .\dist\pages
+    mkdir .\dist\css 
+    mv .\dist\assets\index-*.js .\dist\javascript\mapv2.js
+    mv .\dist\assets\index-*.css .\dist\css\mapv2.css
+    cp .\map.inc .\dist\pages\map.inc
+    rm .\dist\index.html
+    rm -r .\dist\assets
 
-Then deploy the contents of the `dist` directory to your server.  You can also run `npm run serve` to serve the results of the `dist` directory for preview.
+Copier avec le client ftp le contenu de dist dans le module itineraire.
+
