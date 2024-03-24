@@ -5,9 +5,10 @@ import WMTS from 'ol/source/WMTS.js';
 import WMTSTileGrid from 'ol/tilegrid/WMTS.js';
 import GPX from 'ol/format/GPX.js';
 import VectorSource from 'ol/source/Vector.js';
-import {Circle as CircleStyle, Fill, Stroke, Style, Text} from 'ol/style.js';
+import {Circle as CircleStyle, Fill, Stroke, Style, Text, Icon} from 'ol/style.js';
 import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer.js';
-import {fromLonLat, get as getProjection} from 'ol/proj.js';
+import {fromLonLat, get as getProjection, transform} from 'ol/proj.js';
+import {getDistance} from 'ol/sphere';
 import {getWidth} from 'ol/extent.js';
 import Feature from 'ol/Feature.js'
 import Point from 'ol/geom/Point.js'
@@ -83,6 +84,34 @@ function map(data) {
               }),
             }),
           ];
+
+          var length = 0;
+          var coordinates = geometry.getCoordinates()[0]
+          for(var i=0;i<coordinates.length;i++){
+            var s= coordinates[i];
+            var c1 = transform(s, 'EPSG:3857', 'EPSG:4326');
+            if(i+1 <coordinates.length){
+              var f= coordinates[i+1];
+              var c2 = transform(f, 'EPSG:3857', 'EPSG:4326');
+              length += getDistance(c1, c2);
+            }
+            
+            if (length>=(1000)) {
+              var dx = f[0] - s[0];
+              var dy = f[1] - s[1];
+              var rotation = Math.atan2(dy, dx);
+              styles.push(new Style({
+              geometry: new Point([f[0],f[1]]),
+                image: new Icon({
+                  src: 'https://raw.githubusercontent.com/openlayers/openlayers/main/examples/data/arrow.png',
+                  anchor: [0.75, 0.5],
+                  rotateWithView: false,
+                  rotation: -rotation
+                })
+              }));
+              length = 0;
+            }
+          }
         
         
           return styles;
